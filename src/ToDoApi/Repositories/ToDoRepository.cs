@@ -55,5 +55,17 @@ namespace ToDoApi.Repositories
                 throw new NotFoundException($"{id} not found");
             }
         }
+
+        public async Task DeleteToDoItemById(int id)
+        {
+            var item = await _toDoContext.ToDoItems.SingleOrDefaultAsync(item => item.Id == id);
+            if (item == null)
+            {
+                throw new NotFoundException($"{id} does not exist");
+            }
+
+            _toDoContext.Remove(item);
+            await _toDoContext.SaveChangesAsync();
+        }
     }
 }

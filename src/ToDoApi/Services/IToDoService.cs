@@ -12,5 +12,6 @@ namespace ToDoApi.Services
         Task AddToDoItemAsync(ToDoModel newItem);
 
         Task<ToDoModel> GetToDoItemByIdAsync(int id);
+        Task DeleteToDoItemByIdAsync(int id);
     }
 }
