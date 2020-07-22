@@ -36,5 +36,10 @@ namespace ToDoApi.Services
         {
             await _toDoRepository.DeleteToDoItemById(id);
         }
+
+        public async Task UpdateToDoItemByIdAsync(int id, ToDoModel update)
+        {
+            await _toDoRepository.UpdateToDoItemById(id, update);
+        }
     }
 }

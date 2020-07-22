@@ -13,5 +13,6 @@ namespace ToDoApi.Repositories
 
         Task<ToDoModel> GetToDoItemById(int id);
         Task DeleteToDoItemById(int id);
+        Task UpdateToDoItemById(int id, ToDoModel update);
     }
 }

@@ -13,5 +13,6 @@ namespace ToDoApi.Services
 
         Task<ToDoModel> GetToDoItemByIdAsync(int id);
         Task DeleteToDoItemByIdAsync(int id);
+        Task UpdateToDoItemByIdAsync(int id, ToDoModel update);
     }
 }
