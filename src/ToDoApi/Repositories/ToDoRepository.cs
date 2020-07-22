@@ -67,5 +67,21 @@ namespace ToDoApi.Repositories
             _toDoContext.Remove(item);
             await _toDoContext.SaveChangesAsync();
         }
+
+        public async Task UpdateToDoItemById(int id, ToDoModel update)
+        {
+            var item = await _toDoContext.ToDoItems.SingleOrDefaultAsync(item => item.Id == id);
+            if(item == null)
+            {
+                throw new NotFoundException($"{id} not found");
+            }
+
+            item.Summary = update.Summary;
+            item.Description = update.Description;
+            item.Completed = update.Completed;
+
+            _toDoContext.ToDoItems.Update(item);
+            await _toDoContext.SaveChangesAsync();
+        }
     }
 }

@@ -78,5 +78,25 @@ namespace ToDoApi.Controllers
             await _toDoService.DeleteToDoItemByIdAsync(id);
             return Ok();
         }
+
+        /// <summary>
+        /// Update an existing ToDo item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        /// <response code="200">Item updated</response>
+        /// <response code="404">Item does not exist</response>
+        /// <response code="400">Invalid ToDo Item</response>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateToDoItemById([FromRoute]int id, [FromBody] ToDoModel update)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await _toDoService.UpdateToDoItemByIdAsync(id, update);
+            return Ok();
+        }
     }
 }
