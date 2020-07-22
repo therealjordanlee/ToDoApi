@@ -64,5 +64,19 @@ namespace ToDoApi.Controllers
             var result = await _toDoService.GetToDoItemByIdAsync(id);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Delete a ToDo item based on Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <response code="200">Item deleted</response>
+        /// <response code="404">Item does not exist</response>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteToDoItemById([FromRoute]int id)
+        {
+            await _toDoService.DeleteToDoItemByIdAsync(id);
+            return Ok();
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace ToDoApi.Repositories
         Task AddToDoItemAsync(ToDoModel newItem);
 
         Task<ToDoModel> GetToDoItemById(int id);
+        Task DeleteToDoItemById(int id);
     }
 }
