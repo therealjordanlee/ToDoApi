@@ -13,7 +13,8 @@ namespace ToDoApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Summary = table.Column<string>(maxLength: 50, nullable: true),
-                    Description = table.Column<string>(maxLength: 255, nullable: true)
+                    Description = table.Column<string>(maxLength: 255, nullable: true),
+                    Completed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -22,13 +23,13 @@ namespace ToDoApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "ToDoItems",
-                columns: new[] { "Id", "Description", "Summary" },
-                values: new object[] { 1, "(Seeded Data)", "Example ToDo Item #1" });
+                columns: new[] { "Id", "Completed", "Description", "Summary" },
+                values: new object[] { 1, false, "(Seeded Data)", "Example ToDo Item #1" });
 
             migrationBuilder.InsertData(
                 table: "ToDoItems",
-                columns: new[] { "Id", "Description", "Summary" },
-                values: new object[] { 2, "(Seeded Data)", "Example ToDo Item #2" });
+                columns: new[] { "Id", "Completed", "Description", "Summary" },
+                values: new object[] { 2, false, "(Seeded Data)", "Example ToDo Item #2" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

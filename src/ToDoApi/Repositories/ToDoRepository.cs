@@ -43,7 +43,7 @@ namespace ToDoApi.Repositories
             }
         }
 
-        public async Task<ToDoModel> GetToDoItemById(int id)
+        public async Task<ToDoModel> GetToDoItemByIdAsync(int id)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace ToDoApi.Repositories
             }
         }
 
-        public async Task DeleteToDoItemById(int id)
+        public async Task DeleteToDoItemByIdAsync(int id)
         {
             var item = await _toDoContext.ToDoItems.SingleOrDefaultAsync(item => item.Id == id);
             if (item == null)
@@ -68,7 +68,7 @@ namespace ToDoApi.Repositories
             await _toDoContext.SaveChangesAsync();
         }
 
-        public async Task UpdateToDoItemById(int id, ToDoModel update)
+        public async Task UpdateToDoItemByIdAsync(int id, ToDoModel update)
         {
             var item = await _toDoContext.ToDoItems.SingleOrDefaultAsync(item => item.Id == id);
             if(item == null)

@@ -9,8 +9,8 @@ using ToDoApi.Entities;
 namespace ToDoApi.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    [Migration("20200721115033_AddCompletedProperty")]
-    partial class AddCompletedProperty
+    [Migration("20200725120737_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

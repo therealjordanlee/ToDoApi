@@ -9,6 +9,8 @@ using ToDoApi.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using FluentAssertions;
+using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 
 namespace ToDoApi.Tests
 {
@@ -37,6 +39,94 @@ namespace ToDoApi.Tests
                 var expectedResult = RepositoryTestHelper.GetMockToDoItemList();
 
                 result.Should().BeEquivalentTo(expectedResult);
+            }
+        }
+
+        [Fact]
+        public async Task GetToDoItemById_Returns_ToDoRecordFromDatabase()
+        {
+            using (ToDoContext dbContext = RepositoryTestHelper.NewInMemoryToDoContext())
+            {
+                await RepositoryTestHelper.SeedData(dbContext);
+                var todoRepository = new ToDoRepository(dbContext, _mapper);
+                var result = await todoRepository.GetToDoItemByIdAsync(1);
+                var expectedResult = RepositoryTestHelper.GetMockToDoItemList()
+                    .Where(x => x.Id == 1)
+                    .Select(x => new ToDoModel { Summary = x.Summary, Description = x.Description, Completed = x.Completed })
+                    .FirstOrDefault();
+
+                var actualResult = await todoRepository.GetToDoItemByIdAsync(1);
+                actualResult.Should().BeEquivalentTo(expectedResult);
+            }
+        }
+
+        [Fact]
+        public async Task AddToDoItemAsync_Adds_RecordToDatabase()
+        {
+            using (ToDoContext dbContext = RepositoryTestHelper.NewInMemoryToDoContext())
+            {
+                var dummyToDoRecord = new ToDoModel
+                {
+                    Summary = "mock summary",
+                    Description = "mock description",
+                    Completed = false
+                };
+
+                var toDoRepository = new ToDoRepository(dbContext, _mapper);
+                await toDoRepository.AddToDoItemAsync(dummyToDoRecord);
+
+                var actualResult = await dbContext.ToDoItems.SingleAsync(x => x.Summary == dummyToDoRecord.Summary);
+                var expectedResult = new ToDoItem
+                {
+                    Id = 1,
+                    Summary = "mock summary",
+                    Description = "mock description",
+                    Completed = false
+                };
+
+                actualResult.Should().BeEquivalentTo(expectedResult);
+            }
+        }
+
+        [Fact]
+        public async Task DeleteToDoItemById_Removes_ToDoItemFromDatabase()
+        {
+            using (ToDoContext dbContext = RepositoryTestHelper.NewInMemoryToDoContext())
+            {
+                await RepositoryTestHelper.SeedData(dbContext);
+                var toDoRepository = new ToDoRepository(dbContext, _mapper);
+                await toDoRepository.DeleteToDoItemByIdAsync(3);
+
+                var result = await dbContext.ToDoItems.FirstOrDefaultAsync(x => x.Id == 3);
+                result.Should().BeNull();
+            }
+        }
+
+        [Fact]
+        public async Task UpdateToDoItemById_Updates_Existing()
+        {
+            using (ToDoContext dbContext = RepositoryTestHelper.NewInMemoryToDoContext())
+            {
+                await RepositoryTestHelper.SeedData(dbContext);
+                var toDoRepository = new ToDoRepository(dbContext, _mapper);
+                var updateToDoModel = new ToDoModel
+                {
+                    Summary = "summary updated",
+                    Description = "description updated",
+                    Completed = true
+                };
+
+                await toDoRepository.UpdateToDoItemByIdAsync(3, updateToDoModel);
+                var actualResult = await dbContext.ToDoItems.FirstOrDefaultAsync(x => x.Id == 3);
+                var expectedResult = new ToDoItem
+                {
+                    Id = 3,
+                    Summary = updateToDoModel.Summary,
+                    Description = updateToDoModel.Description,
+                    Completed = updateToDoModel.Completed
+                };
+
+                actualResult.Should().BeEquivalentTo(expectedResult);
             }
         }
     }
