@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApi", "ToDoApi.csproj", "{867C2ED7-7F28-4A51-8F40-B8E8F42AB8B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApi", "ToDoApi.csproj", "{867C2ED7-7F28-4A51-8F40-B8E8F42AB8B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DC1E50D0-5443-470D-817A-643FE0821703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApi.Tests", "..\..\tests\ToDoApi.Tests\ToDoApi.Tests.csproj", "{735E7D1A-5977-4F50-A4E5-0F508D90A265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{867C2ED7-7F28-4A51-8F40-B8E8F42AB8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{867C2ED7-7F28-4A51-8F40-B8E8F42AB8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{867C2ED7-7F28-4A51-8F40-B8E8F42AB8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{735E7D1A-5977-4F50-A4E5-0F508D90A265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{735E7D1A-5977-4F50-A4E5-0F508D90A265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{735E7D1A-5977-4F50-A4E5-0F508D90A265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{735E7D1A-5977-4F50-A4E5-0F508D90A265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{735E7D1A-5977-4F50-A4E5-0F508D90A265} = {DC1E50D0-5443-470D-817A-643FE0821703}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB91D028-3276-4478-BF5D-F6F5CDD69ABE}

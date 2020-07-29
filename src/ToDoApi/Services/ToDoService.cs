@@ -28,18 +28,18 @@ namespace ToDoApi.Services
 
         public async Task<ToDoModel> GetToDoItemByIdAsync(int id)
         {
-            var result = await _toDoRepository.GetToDoItemById(id);
+            var result = await _toDoRepository.GetToDoItemByIdAsync(id);
             return result;
         }
 
         public async Task DeleteToDoItemByIdAsync(int id)
         {
-            await _toDoRepository.DeleteToDoItemById(id);
+            await _toDoRepository.DeleteToDoItemByIdAsync(id);
         }
 
         public async Task UpdateToDoItemByIdAsync(int id, ToDoModel update)
         {
-            await _toDoRepository.UpdateToDoItemById(id, update);
+            await _toDoRepository.UpdateToDoItemByIdAsync(id, update);
         }
     }
 }
